@@ -6,8 +6,8 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile :tab="tabs.profile"></Profile>
-                    <Courses :tab="tabs.courses"></Courses>
+                    <Profile :user="user" :tab="tabs.profile"></Profile>
+                    <Courses :courses="courses" :tab="tabs.courses"></Courses>
                 </div>
                 <Controls :selectTab="selectTab" :tabs="tabs"></Controls>
             </section>
@@ -29,13 +29,20 @@
     import Controls from "./components/Controls";
     import Profile from "./components/Profile";
     import Courses from "./components/Courses";
-  //  import User from "./models/User";
-  //  import Course from "./models/Course";
+    import User from "./models/User";
+    import Course from "./models/Course";
     export default {
         name: 'app',
         components: {Controls, Profile, Courses},
         data: () => {
             return {
+                user: new User("John", "Doe", "19/11/1990", "Software engineering", "2.75"),
+                courses: [
+                    new Course("Web Application Development", 1, 21),
+                    new Course("Software Engineering", 1, 30),
+                    new Course("Software testing", 2, 56),
+                    new Course("Java", 1, 100)
+                ],
                 tabs: {
                     'profile': "tab active",
                     'courses': "tab",
