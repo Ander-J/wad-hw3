@@ -31,6 +31,7 @@
     import Courses from "./components/Courses";
     import User from "./models/User";
     import Course from "./models/Course";
+
     export default {
         name: 'app',
         components: {Controls, Profile, Courses},
@@ -61,6 +62,7 @@
                 }
             },
         },
+        
     }
 </script>
 
