@@ -6,7 +6,7 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <div id="profile-container" class="tab active">
+                    <div v-if="changeTabProfile" id="profile-container" class="tab active">
                         <div id="profile">
                             <div class="avatar">
                                 <img src="./assets/me.png" id="picture" alt="My picture">
@@ -24,7 +24,7 @@
                             <div class="clear-fix"></div>
                         </div>
                     </div>
-                    <div id="courses-container" class="tab">
+                    <div v-if="changeTabCourses" id="courses-container" class="tab">
                         <h1 class="title">Courses</h1>
                         <table id="courses">
                             <thead>
@@ -78,7 +78,9 @@
                 </div>
                 <div class="controls">
                     <button id="profile-button" class="pill active">Profile</button>
+                    <a @click=changeTabProfile></a>
                     <button id="courses-button" class="pill">Courses</button>
+                    <a @click=changeTabCourses></a>
                 </div>
             </section>
         </section>
@@ -99,8 +101,17 @@
 
     export default {
         name: 'app',
-        components: {}
+        components: {},
+        methods: {
+            changeTabProfile: function () {
+                //ei tulnud midagi välja praegu
+            },
+            changeTabCourses: function () {
+                // -,,-
+            }
+        }
     }
+
 </script>
 
 <style>
