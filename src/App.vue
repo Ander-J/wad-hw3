@@ -6,82 +6,10 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <div v-if="changeTabProfile" id="profile-container" class="tab active">
-                        <div id="profile">
-                            <div class="avatar">
-                                <img src="./assets/me.png" id="picture" alt="My picture">
-                            </div>
-                            <div class="info">
-                                <ul>
-                                    <li id="name">John Doe</li>
-                                    <li id="birthdate">11/10/1990</li>
-                                    <li id="faculty">Software Engineering</li>
-                                </ul>
-                            </div>
-                            <div id="gpa">
-                                <strong>2.75</strong>
-                            </div>
-                            <div class="clear-fix"></div>
-                        </div>
-                    </div>
-                    <div v-if="changeTabCourses" id="courses-container" class="tab">
-                        <h1 class="title">Courses</h1>
-                        <table id="courses">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Course Title</th>
-                                <th>Semester</th>
-                                <th>Grade</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Agile software development</td>
-                                <td>1</td>
-                                <td>82</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>System modeling</td>
-                                <td>1</td>
-                                <td>85</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Object-oriented programming</td>
-                                <td>2</td>
-                                <td>99</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Estonian language Level A2</td>
-                                <td>2</td>
-                                <td>65</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <br>
-                        <br>
-                        <div>
-                            <button id="add-course-button" class="blue-button">+</button>
-                            <span id="add-course">
-                                <input class="input" type="text" placeholder="Course title" id="title">
-                                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
-                                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
-                                <button class="green-button" id="save-course">Save</button>
-                                <button class="grey-button" id="cancel-course">Cancel</button>
-                            </span>
-                        </div>
-                    </div>
+                    <Profile :tab="tabs.profile"></Profile>
+                    <Courses :tab="tabs.courses"></Courses>
                 </div>
-                <div class="controls">
-                    <button id="profile-button" class="pill active">Profile</button>
-                    <a @click=changeTabProfile></a>
-                    <button id="courses-button" class="pill">Courses</button>
-                    <a @click=changeTabCourses></a>
-                </div>
+                <Controls :selectTab="selectTab" :tabs="tabs"></Controls>
             </section>
         </section>
         <footer>
@@ -98,20 +26,35 @@
 </template>
 
 <script>
-
+    import Controls from "./components/Controls";
+    import Profile from "./components/Profile";
+    import Courses from "./components/Courses";
+  //  import User from "./models/User";
+  //  import Course from "./models/Course";
     export default {
         name: 'app',
-        components: {},
-        methods: {
-            changeTabProfile: function () {
-                //ei tulnud midagi välja praegu
-            },
-            changeTabCourses: function () {
-                // -,,-
+        components: {Controls, Profile, Courses},
+        data: () => {
+            return {
+                tabs: {
+                    'profile': "tab active",
+                    'courses': "tab",
+                }
             }
-        }
+        },
+        methods: {
+            selectTab: function(key) {
+                for (let tabsKey in this.tabs) {
+                    if (tabsKey !== key) {
+                        this.tabs[tabsKey] = "tab";
+                    }
+                    else {
+                        this.tabs[tabsKey] = "tab active";
+                    }
+                }
+            },
+        },
     }
-
 </script>
 
 <style>
